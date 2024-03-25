@@ -11,7 +11,7 @@ pipeline{
         }
         stage('Clone'){
             steps{
-                sh 'gti clone https://github.com/deshwal88/WordStone-UI.git'
+                sh 'git clone https://github.com/deshwal88/WordStone-UI.git'
                 dir('./WordStone-UI'){
                     sh 'git checkout develop'
                     sh 'git pull'
