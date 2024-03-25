@@ -21,6 +21,9 @@ pipeline{
         stage('Install packagess'){
             steps{
                 dir('./WordStone-UI'){
+                    which node
+                    echo "export PATH=\$PATH:/path/to/node" >> ~/.bashrc
+                    source ~/.bashrc
                     sh 'npm install --verbose'
                 }
             }
