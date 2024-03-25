@@ -1,20 +1,18 @@
-pipeline {
+pipeline{
     agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
+    stages{
+        stage('Clean Workspace'){
+            steps{
+                cleanWs()                
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+        stage('Clone'){
+            steps{
+                sh 'git clone https://github.com/deshwal88/WordStone-UI.git'
+                dir('./WordStone-UI'){
+                    sh 'git checkout develop'
+                    sh 'git pull'
+                }
             }
         }
     }
