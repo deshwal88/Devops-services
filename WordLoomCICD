@@ -21,7 +21,7 @@ pipeline{
         stage('Install packagess'){
             steps{
                 dir('./WordStone-UI'){
-                    sh 'npm install'
+                    sh 'npm install --verbose'
                 }
             }
         }
