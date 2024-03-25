@@ -18,7 +18,7 @@ pipeline{
                 }
             }
         }
-        stage('Install packagess'){
+        stage('Build'){
             steps{
                 dir('./WordStone-UI'){
                     sh 'node -v'
