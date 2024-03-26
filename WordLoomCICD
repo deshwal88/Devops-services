@@ -22,8 +22,7 @@ pipeline{
             steps{
                 dir('./WordStone-UI'){
                     sh 'node -v'
-                    sh 'mkdir haila'
-                    sh 'npm install --verbose'
+                    sh 'npm.cmd install'
                 }
             }
         }
