@@ -22,10 +22,8 @@ pipeline{
         }
         stage('Installing dependencies'){
             steps{
-                dir('./WordStone-UI'){
-                    sh 'node -v'
-                    sh 'npm.cmd -v'
-                }
+                sh 'node -v'
+                sh 'npm.cmd -v'
             }
         }
     }
