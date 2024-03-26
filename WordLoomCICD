@@ -1,7 +1,7 @@
 pipeline{
     agent any
-    environment {
-        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+    triggers {
+        pollSCM('* * * * *')
     }
     stages{
         stage('Clean Workspace'){
@@ -9,20 +9,32 @@ pipeline{
                 cleanWs()                
             }
         }
-        stage('Clone'){
+        stage('Code checkout'){
             steps{
-                sh 'git clone https://github.com/deshwal88/WordStone-UI.git'
-                dir('./WordStone-UI'){
-                    sh 'git checkout develop'
-                    sh 'git pull'
+                git branch: 'develop', credentialsId: 'deshwal88', url: 'https://github.com/deshwal88/WordStone-UI.git'
+                script{
+                    checkout([
+                        $class: 'GitSCM', 
+                        branches: [[name: '*/develop']], 
+                        userRemoteConfigs: [[url: 'https://github.com/deshwal88/WordStone-UI.git', credentialsId: 'deshwal88']]
+                    ])
                 }
             }
         }
-        stage('Build'){
+        // stage('Clone'){
+            // steps{
+                // sh 'git clone https://github.com/deshwal88/WordStone-UI.git'
+                // dir('./WordStone-UI'){
+                //     sh 'git checkout develop'
+                //     sh 'git pull'
+                // }
+            // }
+        // }
+        stage('Installing dependencies'){
             steps{
                 dir('./WordStone-UI'){
                     sh 'node -v'
-                    sh 'npm.cmd install'
+                    sh 'npm.cmd -v'
                 }
             }
         }
