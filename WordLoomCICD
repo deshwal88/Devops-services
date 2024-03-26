@@ -11,7 +11,6 @@ pipeline{
         }
         stage('Code checkout'){
             steps{
-                git branch: 'develop', credentialsId: 'deshwal88', url: 'https://github.com/deshwal88/WordStone-UI.git'
                 script{
                     checkout([
                         $class: 'GitSCM', 
@@ -21,15 +20,6 @@ pipeline{
                 }
             }
         }
-        // stage('Clone'){ 
-            // steps{
-                // sh 'git clone https://github.com/deshwal88/WordStone-UI.git'
-                // dir('./WordStone-UI'){
-                //     sh 'git checkout develop'
-                //     sh 'git pull'
-                // }
-            // }
-        // }
         stage('Installing dependencies'){
             steps{
                 dir('./WordStone-UI'){
