@@ -33,7 +33,7 @@ pipeline{
         }
         stage('Deploy to Firebase'){
             steps{
-                sh 'firebase deploy --token ${JENKINS_HOME}/credentials/Firebase'
+                sh 'firebase.cmd deploy --token ${JENKINS_HOME}/credentials/Firebase'
             }
         }
     }
