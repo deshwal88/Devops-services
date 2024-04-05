@@ -28,12 +28,12 @@ pipeline{
         }
         stage('Build'){
             steps{
-                sh 'npm.cmd run build'
+                bat 'npm run build'
             }
         }
         stage('Deploy to Firebase'){
             steps{
-                sh 'firebase.cmd deploy --token ${JENKINS_HOME}/credentials/Firebase'
+                bat 'firebase deploy --token ${JENKINS_HOME}/credentials/Firebase'
             }
         }
     }
