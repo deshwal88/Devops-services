@@ -23,7 +23,7 @@ pipeline{
         stage('Installing dependencies'){
             steps{
                 sh 'node -v'
-                sh 'npm.cmd -i'
+                sh 'npm.cmd i'
             }
         }
         stage('Build'){
