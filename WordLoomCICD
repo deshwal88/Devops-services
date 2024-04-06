@@ -1,8 +1,14 @@
 pipeline{
     agent any
+
+    environment {
+        SERVICE_ACCOUNT_KEY_FILE = credentials('admin-service-account-key')
+    }
+
     triggers {
         pollSCM('* * * * *')
     }
+
     stages{
         stage('Clean Workspace'){
             steps{
@@ -33,7 +39,10 @@ pipeline{
         }
         stage('Deploy to Firebase'){
             steps{
-                bat 'firebase deploy --token ${JENKINS_HOME}/credentials/Firebase'
+                sh '''
+                export GOOGLE_APPLICATION_CREDENTIALS="$SERVICE_ACCOUNT_KEY_FILE"
+                firebase deploy --only hosting
+                '''
             }
         }
     }
