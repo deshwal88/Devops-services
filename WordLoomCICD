@@ -39,7 +39,7 @@ pipeline{
         }
         stage('Deploy to Firebase'){
             steps{
-                sh '''
+                bat '''
                 export GOOGLE_APPLICATION_CREDENTIALS="$SERVICE_ACCOUNT_KEY_FILE"
                 firebase deploy --only hosting
                 '''
