@@ -44,7 +44,7 @@ pipeline{
             steps{
                 bat '''
                 set GOOGLE_APPLICATION_CREDENTIALS=%SERVICE_ACCOUNT_KEY_FILE%
-                npm run deploy
+                firebase experiments:enable webframeworks && firebase deploy --only hosting
                 '''
             }
         }
