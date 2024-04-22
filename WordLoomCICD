@@ -31,8 +31,8 @@ pipeline{
         }
         stage('Installing dependencies'){
             steps{
-                sh 'node -v'
-                sh 'npm i'
+                bat 'node -v'
+                bat 'npm i'
             }
         }
         stage('Build'){
