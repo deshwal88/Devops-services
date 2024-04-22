@@ -5,7 +5,7 @@ pipeline{
     }
 
     environment {
-        SERVICE_ACCOUNT_KEY_FILE = credentials('Firebase')
+        SERVICE_ACCOUNT_KEY_FILE = credentials('service_account_secret')
     }
 
     triggers {
@@ -42,8 +42,10 @@ pipeline{
         }
         stage('Deploy to Firebase'){
             steps{
-                sh 'export GOOGLE_APPLICATION_CREDENTIALS="$SERVICE_ACCOUNT_KEY_FILE"'
-                bat 'npm run deploy'
+                bat '''
+                set GOOGLE_APPLICATION_CREDENTIALS=%SERVICE_ACCOUNT_KEY_FILE%
+                npm run deploy
+                '''
             }
         }
     }
