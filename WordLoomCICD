@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    tools{
+        nodejs 'sys_node'
+    }
 
     environment {
         SERVICE_ACCOUNT_KEY_FILE = credentials('Firebase')
@@ -29,7 +32,7 @@ pipeline{
         stage('Installing dependencies'){
             steps{
                 sh 'node -v'
-                sh 'npm.cmd i'
+                sh 'npm i'
             }
         }
         stage('Build'){
@@ -39,10 +42,8 @@ pipeline{
         }
         stage('Deploy to Firebase'){
             steps{
-                sh '''
-                export GOOGLE_APPLICATION_CREDENTIALS="$SERVICE_ACCOUNT_KEY_FILE"
-                npm run deploy
-                '''
+                sh 'export GOOGLE_APPLICATION_CREDENTIALS="$SERVICE_ACCOUNT_KEY_FILE"'
+                bat 'npm run deploy'
             }
         }
     }
